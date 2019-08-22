@@ -1,0 +1,13 @@
+<div>
+  <form action="/login" method="POST" (submit)="onSubmitForm($event, username.value, password.value)">
+    <label for="username">User Name:</label>
+    <input type="text" id="username" required #username>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" required #password>
+    <br>
+    <input type="submit" value="Login" >
+  </form>
+
+  Not registered? <a routerLink="/register">Signup</a>
+</div>
