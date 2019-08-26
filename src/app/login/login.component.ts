@@ -7,15 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit{
+  showAlert = false;
 
   constructor(private _authService: AuthService, private _router: Router) { }
 
   ngOnInit() {
-    const token = localStorage.getItem('token');
-    if (token !== null) {
-      this._router.navigateByUrl('');
-    }
+    this.showAlert = false;
   }
 
   onSubmitForm(event, username, password) {
@@ -25,9 +23,8 @@ export class LoginComponent implements OnInit {
       .subscribe((token) => {
         localStorage.setItem('token', token);
         this._router.navigateByUrl('');
-        console.log('login success');
       }, (error) => {
-        console.log(error);
+        this.showAlert = true;
       });
   }
 }

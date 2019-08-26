@@ -8,32 +8,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit{
-  
-  constructor(private authService: AuthService, private _router: Router) { }
+  duplicacyError = false;
+  internalServerError = false;
+
+  constructor(private _authService: AuthService, private _router: Router) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    if (token !== null) {
-      this._router.navigateByUrl('');
-    }
+    this.duplicacyError = false;
+    this.internalServerError = false;
   }
 
-  onRegisterClick(usernameTxt, passwordTxt) {
+  onSubmitForm(event, usernameTxt, passwordTxt) {
+    event.preventDefault();
     const user = {
       username: usernameTxt.value,
       password: passwordTxt.value,
     };
-    if (user.username.trim() === '') {
-      alert('User Name can\'t be empty');
-    } else if (user.password.trim() === ''){
-      alert('Password can\'t be empty');
-    } else {
-      this.authService.register(user)
-        .subscribe(data => {
-          console.log(data);
-          this._router.navigateByUrl('/login');
-        });
-    }
+    this.duplicacyError = false;
+    this.internalServerError = false;
+    console.log(user);
+    this._authService.register(user)
+      .subscribe(() => this._router.navigateByUrl('/login'),
+      (error) => {
+        if (error.error.code === 11000) {
+          this.duplicacyError = true;
+        } else {
+          this.internalServerError = true;
+        }
+      });
   }
-
 }

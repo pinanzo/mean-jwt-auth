@@ -13,12 +13,12 @@ export class ProfileComponent implements OnInit {
   constructor(private _authService: AuthService, private _router: Router) { }
 
   ngOnInit() {
-    this._authService.checkToken()
-      .subscribe((user) => {
-        this.username = user.username;
-      }, (error) => {
-        this._router.navigateByUrl('login');
-      });
+    // this._authService.checkToken()
+    //   .subscribe((user) => {
+    //     this.username = user.username;
+    //   }, (error) => {
+    //     this._router.navigateByUrl('login');
+    //   });
   }
 
   onLogoutClick() {
