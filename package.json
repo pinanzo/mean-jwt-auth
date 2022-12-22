@@ -25,7 +25,7 @@
     "core-js": "^2.5.4",
     "express-session": "^1.16.2",
     "jquery": "^3.4.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.6.10",
     "ngx-bootstrap": "^5.1.1",
     "passport": "^0.4.0",
